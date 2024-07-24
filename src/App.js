@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import StaffDashboard from "./pages/StaffDash/StaffDashboard";
+import UserDashboard from "./pages/UserDash/UserDashboard";
+import Register from "./pages/Register";
+import NoPage from "./pages/NoPage";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App(){
+  const navbarItem = [{link:'/',label:'Login'},{link:'/staff',label:'Staff Dashboard'},{link:'/user',label:'User Dashboard'},{link:'/reg',label:'Register'}]
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main navbarItems={navbarItem}/>}>
+          <Route index element={<Login/>}/>
+          <Route path="staff" element={<StaffDashboard/>}/>
+          <Route path="user" element={<UserDashboard/>}/>
+          <Route path="reg" element={<Register />}/>
+          <Route path="*" element={<NoPage/>}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
-
-export default App;
